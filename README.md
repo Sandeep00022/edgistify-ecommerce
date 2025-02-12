@@ -154,7 +154,7 @@ http://localhost:5000/api
 
 ## **User Routes**
 
-### **POST /auth/register**
+### **POST /user/register**
 **Description**: Register a new user.
 
 **Request Body**:
@@ -174,7 +174,7 @@ http://localhost:5000/api
 }
 ```
 
-### **POST /auth/login**
+### **POST /user/login**
 **Description**: Login with email and password.
 
 **Request Body**:
