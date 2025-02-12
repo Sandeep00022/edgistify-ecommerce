@@ -28,7 +28,7 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items, totalPrice } = orderDetails;
-  
+
   // Set the default payment status to "paid"
   const [shippingAddress, setShippingAddress] = useState(
     orderDetails.shippingAddress
@@ -79,8 +79,9 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
 
     try {
       dispatch(placeOrder(payload));
-      dispatch(clearCartData());
       toast.success("Order placed successfully!");
+      dispatch(clearCartData());
+
       setTimeout(() => {
         navigate("/");
       }, 2000);

@@ -16,9 +16,7 @@ export const orderValidationSchema = Joi.object({
   totalPrice: Joi.number().min(0).required(),
   shippingAddress: Joi.object({
     fullName: Joi.string().min(3).max(50).required(),
-    phone: Joi.string()
-      .pattern(/^\d{10}$/)
-      .required(),
+    phone: Joi.string().required(),
     addressLine1: Joi.string().min(5).max(100).required(),
     addressLine2: Joi.string().allow(""),
     city: Joi.string().min(2).max(50).required(),
