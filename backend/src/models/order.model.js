@@ -35,7 +35,6 @@ const OrderSchema = new mongoose.Schema(
       phone: {
         type: String,
         required: true,
-        match: [/^\d{10}$/, "Invalid phone number"],
       },
       addressLine1: { type: String, required: true },
       addressLine2: { type: String },
