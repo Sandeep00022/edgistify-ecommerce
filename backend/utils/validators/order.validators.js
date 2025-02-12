@@ -4,9 +4,11 @@ export const orderValidationSchema = Joi.object({
   items: Joi.array()
     .items(
       Joi.object({
-        product: Joi.string().hex().length(24).required(),
+        product: Joi.object().required(),
+        _id: Joi.string(),
         quantity: Joi.number().min(1).required(),
         price: Joi.number().min(0).required(),
+        totalItemPrice: Joi.number().min(0).required(),
       })
     )
     .min(1)

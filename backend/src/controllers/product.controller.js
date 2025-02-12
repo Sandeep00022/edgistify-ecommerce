@@ -45,7 +45,7 @@ export const createProduct = async (req, res) => {
   }
 };
 
-// ✅ Get all products (with pagination & filtering)
+// ✅ Get all products
 export const getAllProducts = async (req, res) => {
   try {
     const {

@@ -2,7 +2,7 @@ import { cartValidationSchema } from "../../utils/validators/cart.validators.js"
 import Cart from "../models/cart.model.js";
 import Product from "../models/product.model.js";
 
-// 🛒 Add or Update Cart Item
+//  Add or Update Cart Item
 export const addToCart = async (req, res) => {
   try {
     const { error } = cartValidationSchema.validate(req.body);
@@ -56,7 +56,7 @@ export const addToCart = async (req, res) => {
   }
 };
 
-// 📌 Get User Cart
+//  Get User Cart
 export const getCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -77,10 +77,10 @@ export const getCart = async (req, res) => {
 // 🗑 Remove Item from Cart
 export const removeFromCart = async (req, res) => {
   try {
-    const { user } = req.body;
+    const userId = req?.user?.id;
     const { productId } = req.params;
 
-    let cart = await Cart.findOne({ user });
+    let cart = await Cart.findOne({ user:userId });
     if (!cart) return res.status(404).json({ message: "Cart not found" });
 
     cart.items = cart.items.filter(
@@ -107,6 +107,81 @@ export const clearCart = async (req, res) => {
     await Cart.findOneAndDelete({ user: userId });
 
     return res.status(200).json({ message: "Cart cleared successfully" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
+  }
+};
+
+export const increaseQuantity = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { productId } = req.params;
+
+    const cart = await Cart.findOne({ user: userId });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    const item = cart.items.find(
+      (item) => item.product.toString() === productId
+    );
+    if (!item) return res.status(404).json({ message: "Product not in cart" });
+
+    const product = await Product.findById(productId);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    if (item.quantity >= product.stock) {
+      return res.status(400).json({ message: "Stock limit reached" });
+    }
+
+    item.quantity += 1;
+    item.totalItemPrice = item.quantity * item.price;
+
+    cart.totalPrice = cart.items.reduce(
+      (acc, item) => acc + item.totalItemPrice,
+      0
+    );
+    await cart.save();
+
+    return res.status(200).json({ message: "Quantity increased", cart });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
+  }
+};
+
+// ➖ Decrease Quantity
+export const decreaseQuantity = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { productId } = req.params;
+
+    const cart = await Cart.findOne({ user: userId });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    const itemIndex = cart.items.findIndex(
+      (item) => item.product.toString() === productId
+    );
+    if (itemIndex === -1)
+      return res.status(404).json({ message: "Product not in cart" });
+
+    let item = cart.items[itemIndex];
+
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+      item.totalItemPrice = item.quantity * item.price;
+    } else {
+      cart.items.splice(itemIndex, 1);
+    }
+
+    cart.totalPrice = cart.items.reduce(
+      (acc, item) => acc + item.totalItemPrice,
+      0
+    );
+    await cart.save();
+
+    return res.status(200).json({ message: "Quantity decreased", cart });
   } catch (error) {
     return res
       .status(500)

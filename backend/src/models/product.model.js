@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema(
       trim: true,
       minlength: 3,
       maxlength: 100,
-      unique: true, // Ensures unique product names
+      unique: true, 
     },
     slug: {
       type: String,

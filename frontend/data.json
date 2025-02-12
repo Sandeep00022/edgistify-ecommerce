@@ -1,0 +1,179 @@
+[
+    {
+      "name": "Samsung Galaxy S23 Ultra",
+      "slug": "samsung-galaxy-s23-ultra",
+      "description": "A flagship smartphone with an advanced camera and powerful processor.",
+      "price": 1199,
+      "discountPrice": 999,
+      "images": ["https://source.unsplash.com/400x300/?smartphone"],
+      "category": "electronics",
+      "brand": "Samsung",
+      "stock": 10
+    },
+    {
+      "name": "Apple MacBook Air M2",
+      "slug": "apple-macbook-air-m2",
+      "description": "A lightweight laptop with M2 chip and Retina display.",
+      "price": 1299,
+      "discountPrice": 1199,
+      "images": ["https://source.unsplash.com/400x300/?laptop"],
+      "category": "electronics",
+      "brand": "Apple",
+      "stock": 5
+    },
+    {
+      "name": "Sony WH-1000XM5 Headphones",
+      "slug": "sony-wh-1000xm5-headphones",
+      "description": "Noise-canceling wireless headphones with superior audio quality.",
+      "price": 399,
+      "discountPrice": 349,
+      "images": ["https://source.unsplash.com/400x300/?headphones"],
+      "category": "electronics",
+      "brand": "Sony",
+      "stock": 15
+    },
+    {
+      "name": "Nike Air Max 270",
+      "slug": "nike-air-max-270",
+      "description": "Stylish and comfortable sneakers with air cushioning.",
+      "price": 160,
+      "discountPrice": 140,
+      "images": ["https://source.unsplash.com/400x300/?shoes"],
+      "category": "fashion",
+      "brand": "Nike",
+      "stock": 25
+    },
+    {
+      "name": "Adidas Hoodie",
+      "slug": "adidas-hoodie",
+      "description": "A cozy and stylish hoodie for casual wear.",
+      "price": 80,
+      "discountPrice": 70,
+      "images": ["https://source.unsplash.com/400x300/?hoodie"],
+      "category": "fashion",
+      "brand": "Adidas",
+      "stock": 30
+    },
+    {
+      "name": "LG 55-inch OLED TV",
+      "slug": "lg-55-inch-oled-tv",
+      "description": "An ultra HD OLED TV with vibrant colors and deep blacks.",
+      "price": 1499,
+      "discountPrice": 1399,
+      "images": ["https://source.unsplash.com/400x300/?tv"],
+      "category": "electronics",
+      "brand": "LG",
+      "stock": 8
+    },
+    {
+      "name": "iPad Pro 12.9-inch",
+      "slug": "ipad-pro-12-9-inch",
+      "description": "A high-performance tablet with Liquid Retina display.",
+      "price": 1099,
+      "discountPrice": 999,
+      "images": ["https://source.unsplash.com/400x300/?tablet"],
+      "category": "electronics",
+      "brand": "Apple",
+      "stock": 12
+    },
+    {
+      "name": "The Alchemist - Paulo Coelho",
+      "slug": "the-alchemist-paulo-coelho",
+      "description": "A philosophical book about following your dreams.",
+      "price": 15,
+      "discountPrice": 12,
+      "images": ["https://source.unsplash.com/400x300/?book"],
+      "category": "books",
+      "brand": "HarperCollins",
+      "stock": 40
+    },
+    {
+      "name": "Wooden Study Table",
+      "slug": "wooden-study-table",
+      "description": "A modern and sturdy wooden study table.",
+      "price": 200,
+      "discountPrice": 180,
+      "images": ["https://source.unsplash.com/400x300/?table"],
+      "category": "home_appliances",
+      "brand": "IKEA",
+      "stock": 15
+    },
+    {
+      "name": "Samsung Smart Refrigerator",
+      "slug": "samsung-smart-refrigerator",
+      "description": "A double-door smart fridge with AI cooling.",
+      "price": 2500,
+      "discountPrice": 2300,
+      "images": ["https://source.unsplash.com/400x300/?refrigerator"],
+      "category": "home_appliances",
+      "brand": "Samsung",
+      "stock": 5
+    },
+    {
+      "name": "Hot Wheels Car Set",
+      "slug": "hot-wheels-car-set",
+      "description": "A pack of 5 mini die-cast cars for kids.",
+      "price": 20,
+      "discountPrice": 18,
+      "images": ["https://source.unsplash.com/400x300/?toys"],
+      "category": "toys",
+      "brand": "Hot Wheels",
+      "stock": 50
+    },
+    {
+      "name": "Football - Adidas",
+      "slug": "football-adidas",
+      "description": "A FIFA-approved football for professional gameplay.",
+      "price": 45,
+      "discountPrice": 40,
+      "images": ["https://source.unsplash.com/400x300/?football"],
+      "category": "sports",
+      "brand": "Adidas",
+      "stock": 30
+    },
+    {
+      "name": "Dumbbells Set (10kg)",
+      "slug": "dumbbells-set-10kg",
+      "description": "A pair of adjustable dumbbells for home workouts.",
+      "price": 80,
+      "discountPrice": 70,
+      "images": ["https://source.unsplash.com/400x300/?gym"],
+      "category": "sports",
+      "brand": "Decathlon",
+      "stock": 20
+    },
+    {
+      "name": "Lakme Face Cream",
+      "slug": "lakme-face-cream",
+      "description": "A daily moisturizing cream for glowing skin.",
+      "price": 15,
+      "discountPrice": 12,
+      "images": ["https://source.unsplash.com/400x300/?beauty"],
+      "category": "beauty",
+      "brand": "Lakme",
+      "stock": 60
+    },
+    {
+      "name": "Car Vacuum Cleaner",
+      "slug": "car-vacuum-cleaner",
+      "description": "A portable vacuum cleaner for car interiors.",
+      "price": 50,
+      "discountPrice": 45,
+      "images": ["https://source.unsplash.com/400x300/?car"],
+      "category": "automotive",
+      "brand": "Bosch",
+      "stock": 25
+    },
+    {
+      "name": "Organic Green Tea",
+      "slug": "organic-green-tea",
+      "description": "Premium organic green tea for a healthy lifestyle.",
+      "price": 25,
+      "discountPrice": 20,
+      "images": ["https://source.unsplash.com/400x300/?tea"],
+      "category": "grocery",
+      "brand": "Lipton",
+      "stock": 40
+    }
+  ]
+  

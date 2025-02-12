@@ -1,4 +1,5 @@
 import { orderValidationSchema } from "../../utils/validators/order.validators.js";
+import Cart from "../models/cart.model.js";
 import Order from "../models/order.model.js";
 import Product from "../models/product.model.js";
 
@@ -11,11 +12,11 @@ export const placeOrder = async (req, res) => {
     const { items } = req.body;
 
     for (const item of items) {
-      const product = await Product.findById(item.product);
+      const product = await Product.findById(item.product._id);
       if (!product)
         return res
           .status(404)
-          .json({ message: `Product not found: ${item.product}` });
+          .json({ message: `Product not found: ${item.product._id}` });
       if (product.stock < item.quantity)
         return res
           .status(400)
@@ -32,6 +33,12 @@ export const placeOrder = async (req, res) => {
       user: req.user.id,
       ...req.body,
     });
+
+    // Clear the user's cart after placing the order
+    await Cart.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: { items: [] } }
+    );
 
     res.status(201).json({ message: "Order placed successfully", order });
   } catch (error) {
@@ -55,7 +62,7 @@ export const getMyOrders = async (req, res) => {
   }
 };
 
-// Get All Orders (Admin Only)
+// Get All Orders 
 export const getAllOrders = async (req, res) => {
   try {
     if (req.user.role !== "admin")
@@ -72,7 +79,7 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-//  Update Order Status (Admin Only)
+//  Update Order Status 
 export const updateOrderStatus = async (req, res) => {
   try {
     if (req.user.role !== "admin")
@@ -96,7 +103,7 @@ export const updateOrderStatus = async (req, res) => {
   }
 };
 
-// 📌 Delete Order (Admin Only)
+// Delete Order 
 export const deleteOrder = async (req, res) => {
   try {
     if (req.user.role !== "admin")
