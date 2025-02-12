@@ -14,8 +14,7 @@ import OrderModal from "../components/OrderModal";
 const Cart = () => {
   const dispatch = useDispatch();
   const { cart, loading, error } = useSelector((state) => state.cart);
-   console.log(cart)
-  // State to handle modal visibility
+
   const [openModal, setOpenModal] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     items: cart?.items || [],
@@ -31,7 +30,7 @@ const Cart = () => {
       postalCode: "",
     },
     paymentInfo: {
-      method: "cod", // default payment method
+      method: "cod", 
       status: "pending",
       transactionId: null,
     },
@@ -72,14 +71,24 @@ const Cart = () => {
     ) || 0;
 
   const handleCheckout = () => {
-    setOrderDetails({ ...orderDetails, totalPrice, items:cart?.items });
+    setOrderDetails({ ...orderDetails, totalPrice, items: cart?.items });
     setOpenModal(true);
   };
 
   if (loading) return <Spinner />;
   if (error)
     return (
-      <p className="text-red-500">{error?.message || "An error occurred"}</p>
+      <div className="text-center py-10">
+        <p className="text-gray-500 text-lg mb-4">
+          Your cart is empty.{" "}
+          <Link
+            to="/"
+            className="text-indigo-600 hover:text-indigo-700 font-semibold"
+          >
+            Shop Now
+          </Link>
+        </p>
+      </div>
     );
 
   return (
@@ -130,8 +139,8 @@ const Cart = () => {
                   >
                     <td className="p-3 flex items-center gap-4">
                       <img
-                        src={item?.image || "https://via.placeholder.com/150"}
-                        alt={item?.name || "Product Image"}
+                        src={item?.product?.images[0]}
+                        alt={item?.product?.name}
                         className="w-16 h-16 object-cover rounded-lg"
                       />
                       <span className="text-gray-800 font-medium">

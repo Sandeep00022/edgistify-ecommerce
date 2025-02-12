@@ -29,7 +29,6 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
   const navigate = useNavigate();
   const { items, totalPrice } = orderDetails;
 
-  // Set the default payment status to "paid"
   const [shippingAddress, setShippingAddress] = useState(
     orderDetails.shippingAddress
   );
@@ -38,6 +37,7 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
     status: orderDetails.paymentInfo.status || "paid",
   });
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,7 +49,6 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
     setPaymentInfo({ ...paymentInfo, method: value });
   };
 
-  // Validate the form inputs
   const validateForm = () => {
     const newErrors = {};
 
@@ -70,7 +69,6 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Submit handler for the form
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -79,13 +77,13 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
 
     try {
       dispatch(placeOrder(payload));
-      toast.success("Order placed successfully!");
+      setSuccessMessage("Order placed successfully! 😊");
       dispatch(clearCartData());
 
       setTimeout(() => {
         navigate("/");
+        handleClose();
       }, 2000);
-      handleClose();
     } catch (error) {
       toast.error("Failed to place the order.");
     }
@@ -110,6 +108,21 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
       </DialogTitle>
 
       <DialogContent sx={{ py: 4 }}>
+        {successMessage && (
+          <div
+            className="flex justify-between items-center p-4 mb-4 text-white font-semibold"
+            style={{
+              backgroundColor: "#48bb78",
+              borderRadius: "8px",
+            }}
+          >
+            <span>{successMessage}</span>
+            <span role="img" aria-label="smile">
+              😊
+            </span>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
             {/* Shipping Details */}
@@ -283,44 +296,12 @@ const OrderModal = ({ open, handleClose, orderDetails }) => {
               >
                 <MenuItem value="cod" sx={{ py: 2 }}>
                   <div className="flex items-center gap-3">
-                    <img src="/cod-icon.png" alt="COD" className="w-6 h-6" />
+                    <img
+                      src="https://cdn1.vectorstock.com/i/1000x1000/79/75/cash-on-delivery-icon-black-sign-vector-35237975.jpg"
+                      alt="COD"
+                      className="w-6 h-6"
+                    />
                     <span>Cash on Delivery (COD)</span>
-                  </div>
-                </MenuItem>
-                <MenuItem value="credit_card" sx={{ py: 2 }}>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/credit-card-icon.png"
-                      alt="Credit Card"
-                      className="w-6 h-6"
-                    />
-                    <span>Credit Card</span>
-                  </div>
-                </MenuItem>
-                <MenuItem value="debit_card" sx={{ py: 2 }}>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/debit-card-icon.png"
-                      alt="Debit Card"
-                      className="w-6 h-6"
-                    />
-                    <span>Debit Card</span>
-                  </div>
-                </MenuItem>
-                <MenuItem value="paypal" sx={{ py: 2 }}>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/paypal-icon.png"
-                      alt="PayPal"
-                      className="w-6 h-6"
-                    />
-                    <span>PayPal</span>
-                  </div>
-                </MenuItem>
-                <MenuItem value="upi" sx={{ py: 2 }}>
-                  <div className="flex items-center gap-3">
-                    <img src="/upi-icon.png" alt="UPI" className="w-6 h-6" />
-                    <span>UPI Payment</span>
                   </div>
                 </MenuItem>
               </TextField>
